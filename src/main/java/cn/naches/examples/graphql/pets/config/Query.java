@@ -1,7 +1,9 @@
 package cn.naches.examples.graphql.pets.config;
 
-import cn.naches.examples.graphql.pets.bean.Pet;
+import cn.naches.examples.graphql.pets.entity.Pet;
+import cn.naches.examples.graphql.pets.service.PetService;
 import com.coxautodev.graphql.tools.GraphQLRootResolver;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,12 +14,14 @@ import java.util.List;
  *
  */
 public class Query implements GraphQLRootResolver {
+    @Autowired
+    PetService petService;
 
     public Query(){
 
     }
 
     public List<Pet> allPets(){
-        return Collections.emptyList();
+        return petService.findAllPets();
     }
 }

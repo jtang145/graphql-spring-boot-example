@@ -1,9 +1,20 @@
-package cn.naches.examples.graphql.pets.bean;
+package cn.naches.examples.graphql.pets.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "demo_pet")
 public class Pet {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private String id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "age")
     private int age;
 
     public String getId() {
