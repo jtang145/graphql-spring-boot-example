@@ -16,4 +16,10 @@ public class PetService {
     public List<Pet> findAllPets() {
         return petRepository.findAll();
     }
+
+    public Pet addPet(String name) {
+        Pet newPet = new Pet();
+        newPet.setName(name);
+        return petRepository.saveAndFlush(newPet);
+    }
 }
