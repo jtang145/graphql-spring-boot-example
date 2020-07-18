@@ -1,6 +1,7 @@
 schema {
     query: Query
     mutation: Mutation
+    subscription: Subscription
 }
 
 type Query {
@@ -11,8 +12,12 @@ type Mutation {
     addPet(name: String): Pet
 }
 
+type Subscription {
+    newPet: Pet!
+}
+
 type Pet {
     id: ID!
-    name: String
+    name: String!
     age: Int
 }
