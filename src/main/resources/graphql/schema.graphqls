@@ -10,6 +10,7 @@ type Query {
 
 type Mutation {
     addPet(name: String): Pet
+    updatePet(id: ID!, name: String, age: Int): Pet
 }
 
 type Subscription {

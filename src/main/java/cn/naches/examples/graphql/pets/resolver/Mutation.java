@@ -14,4 +14,8 @@ public class Mutation implements GraphQLMutationResolver {
     public Pet addPet(String name){
         return petService.addPet(name);
     }
+
+    public Pet updatePet(int id, String name, Integer age){
+        return petService.updatePet(id, name, age);
+    }
 }
