@@ -27,3 +27,8 @@ spring:
     initialization-mode: always
     schema: classpath:schema.sql
     data: classpath:data.sql
+    data-username: sa
+    data-password: password
+  jpa:
+    hibernate:
+      ddl-auto: update

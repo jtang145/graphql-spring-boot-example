@@ -15,7 +15,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.concurrent.*;
 
 @Component
@@ -40,20 +39,21 @@ public class Subscription implements GraphQLSubscriptionResolver {
 
     private void initNewPetPublisher() {
         Observable<Pet> observable = Observable.create(e -> {
-            ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-            executorService.scheduleAtFixedRate(() -> {
+            ExecutorService executorService = Executors.newSingleThreadExecutor();
+            executorService.submit(() -> {
                 logger.info("new schedule for newPet subscription");
-                try {
-                    Pet pet = newPetQueue.take().get();
-                    logger.info("new Pet subscription arrived for " + pet.getName());
-                    e.onNext(pet);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                } catch (ExecutionException e1) {
-                    e1.printStackTrace();
+                while (true) {
+                    try {
+                        Pet pet = newPetQueue.take().get();
+                        logger.info("new Pet subscription arrived for " + pet.getName());
+                        e.onNext(pet);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    } catch (ExecutionException e1) {
+                        e1.printStackTrace();
+                    }
                 }
-
-            }, 0, 2, TimeUnit.SECONDS);
+            });
         });
 
         ConnectableObservable connectableObservable = observable.share().publish();
