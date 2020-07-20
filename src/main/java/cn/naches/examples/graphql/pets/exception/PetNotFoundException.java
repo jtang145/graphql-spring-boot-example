@@ -8,6 +8,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Make backend error status can be passed to client
+ */
 public class PetNotFoundException extends RuntimeException implements GraphQLError {
     private String fieldName;
 

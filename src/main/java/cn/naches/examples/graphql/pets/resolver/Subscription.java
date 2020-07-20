@@ -3,10 +3,10 @@ package cn.naches.examples.graphql.pets.resolver;
 import cn.naches.examples.graphql.pets.entity.Pet;
 import cn.naches.examples.graphql.pets.service.PetService;
 import com.coxautodev.graphql.tools.GraphQLSubscriptionResolver;
-import io.reactivex.BackpressureStrategy;
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.observables.ConnectableObservable;
+import io.reactivex.rxjava3.core.BackpressureStrategy;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.observables.ConnectableObservable;
 import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +62,7 @@ public class Subscription implements GraphQLSubscriptionResolver {
     }
 
     public Publisher<Pet> newPet() {
-        logger.info("newPet subscribed.");
+        logger.info("newPet subscription checking...");
         return this.newPetPublisher;
     }
 }

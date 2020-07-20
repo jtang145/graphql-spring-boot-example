@@ -27,6 +27,7 @@ public class PetGraphQLErrorHandler implements GraphQLErrorHandler {
             ExceptionWhileDataFetching ex = (ExceptionWhileDataFetching) graphQLError;
             if(ex.getException() instanceof GraphQLError){
                 Throwable filtered = ex.getException();
+                // Hide stack trace to client
                 filtered.setStackTrace(new StackTraceElement[0]);
                 return (GraphQLError) filtered;
             }
